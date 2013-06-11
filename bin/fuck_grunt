@@ -1,3 +1,50 @@
 #!/usr/bin/env node
 
-require('../dist/fuck_grunt');
+require('colors');
+var fs = require('fs')
+  , fuck_grunt = require('../dist/fuck_grunt');
+
+var log = function(color) {
+  return console.log.apply(console, ['fuck_grunt'[color]].concat([].slice.call(arguments, 1)));
+};
+var info = log.bind(null, 'cyan');
+var error = log.bind(null, 'red');
+var success = log.bind(null, 'green');
+
+var header = function() {
+  info();
+  info('version ' + require('../package').version);
+}
+var footer = function() {
+  info();
+}
+
+var usage = function(exit_code, output) {
+  header();
+  if (output) { output(); }
+  info('Usage: fuck_grunt <url>');
+  footer();
+  process.exit(exit_code);
+};
+
+if (process.argv.length !== 3) { usage(0); }
+
+var url = process.argv[process.argv.length - 1];
+
+fuck_grunt(url, {write_files: true}, function(err, data) {
+  if (err) {
+    usage(1, function() {
+      error();
+      error('Invalid URL ' + url.yellow);
+      error();
+    });
+  }
+  
+  header();
+  if (data.html.filename) { success('Wrote ' + data.html.filename); }
+  if (data.js.filename)   { success('Compiled ' + data.js.files.length + ' file(s) into ' + data.js.filename); }
+  if (data.css.filename)  { success('Compiled ' + data.css.files.length + ' file(s) into ' + data.css.filename); }
+  footer();
+  
+  process.exit(0);
+});

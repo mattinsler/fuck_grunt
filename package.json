@@ -1,7 +1,7 @@
 {
   "name": "fuck_grunt",
   "description": "Does what it's named",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "bin": {
     "fuck_grunt": "./bin/fuck_grunt"
   },
@@ -31,7 +31,8 @@
     "request": "~2.21.0",
     "cheerio": "~0.12.0",
     "cssmin": "~0.4.1",
-    "uglify-js2": "~2.1.11"
+    "uglify-js2": "~2.1.11",
+    "colors": "~0.6.0-1"
   },
   "devDependencies": {
     "grunt": "~0.3.15",

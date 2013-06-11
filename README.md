@@ -1,5 +1,4 @@
 # fuck_grunt
-
 Concat and minify the javascript and CSS on any webpage. Just point fuck_grunt at the page and it'll give you
 back the html, js, and css files.
 
@@ -7,10 +6,44 @@ This is definitely a hack, but useful if you already have a running site and jus
 without spending a lot of time getting a whole grunt setup going. Yes you'll have to do it again if you change any code,
 but that's why this is called a hack. =-)
 
-# Installation
+## Installation
+```bash
+$ npm install -g fuck_grunt
+```
 
-    $ npm install -g fuck_grunt
+## Usage
+```bash
+$ fuck_grunt http://www.dailypuppy.com/
+```
 
-# Usage
+## Programmatic Usage
+```javascript
+var fuck_grunt = require('fuck_grunt');
 
-    $ fuck_grunt http://www.dailypuppy.com/
+// Just process files
+fuck_grunt('http://www.dailypuppy.com', handle_result);
+
+// Process files and write to current directory
+fuck_grunt('http://www.dailypuppy.com', {write_files: true}, handle_result);
+```
+
+### Result Data
+```javascript
+{
+  "html": {
+    "filename": "..."    // filename of output file or null
+    "content": "...",    // processed file content
+    "files": [...]       // list of files included in content
+  },
+  "js": {
+    "filename": "...",
+    "content": "...",
+    "files": [...]
+  },
+  "css": {
+    "filename": "...",
+    "content": "...",
+    "files": [...]
+  },
+}
+```
