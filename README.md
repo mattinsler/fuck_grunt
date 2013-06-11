@@ -16,6 +16,15 @@ $ npm install -g fuck_grunt
 $ fuck_grunt http://www.dailypuppy.com/
 ```
 
+### Don't fuck some of my javascript/CSS files
+
+To exclude some scripts or link tags, just add the `data-no-fuck` property to the tag
+
+```html
+<script src="/foo/bar.js" data-no-fuck></script>
+<link href="/foo/bar.css" rel="stylesheet" data-no-fuck>
+```
+
 ## Programmatic Usage
 ```javascript
 var fuck_grunt = require('fuck_grunt');
